@@ -11,4 +11,8 @@ export class NoteService {
         const note = new this.noteModel(data);
         return await note.save();
     }
+
+    async gelAll(): Promise<Note[]>{
+        return await this.noteModel.find();
+    }
 }
