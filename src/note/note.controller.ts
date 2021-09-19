@@ -1,12 +1,11 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
-import { GetUser } from 'src/auth/get-user-decorator';
-import { User } from 'src/auth/model/user.model';
+import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/auth.guard';
+import { GetNoteRequestDTO } from './dto/get-note-request.dt0';
 import { Note } from './model/note.model';
 import { NoteService } from './note.service';
 
 @Controller('note')
-@UseGuards(AuthGuard())
+@UseGuards(new JwtAuthGuard())
 export class NoteController {
     constructor(private readonly noteService:NoteService){}
 
@@ -16,7 +15,13 @@ export class NoteController {
     }
 
     @Post('/getAll')
-    async getAll( @GetUser() user:User): Promise<Note[]>{
+    async getAll(): Promise<Note[]>{
         return await this.noteService.gelAll();
+    }
+
+    @Post('/getNote')
+    async getNote(@Request() req, @Body() body: GetNoteRequestDTO): Promise<Note>{
+        console.log(req.user);
+        return await this.noteService.getNote(body);
     }
 }

@@ -1,7 +1,9 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model, Types } from 'mongoose';
+import { Model } from 'mongoose';
+import { ErrorId } from 'src/base-exception-filter/error-id';
+import { CustomError } from 'src/base-exception-filter/model/base-exception.model';
 import { UserID } from './dto/user.dto';
 import { User, UserDocument } from './model/user.model';
 
@@ -17,7 +19,7 @@ export class AuthService {
     async signIn(user: User): Promise<string> {
         const findUser = await this.userModel.findOne(user);
         if (!findUser) {
-            throw new UnauthorizedException();
+            throw new CustomError(ErrorId.unauthorize);
         }
         const payload: UserID = { id: findUser._id };
         return this.jwtService.sign(payload);
