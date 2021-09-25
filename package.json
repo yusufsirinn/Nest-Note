@@ -27,7 +27,9 @@
     "@nestjs/mongoose": "^7.2.4",
     "@nestjs/passport": "^7.1.5",
     "@nestjs/platform-express": "^7.6.15",
+    "@nestjs/platform-socket.io": "^8.0.7",
     "@nestjs/schedule": "^1.0.1",
+    "@nestjs/websockets": "^8.0.7",
     "@types/cron": "^1.7.3",
     "chalk": "^4.1.1",
     "dotenv": "^8.2.0",
@@ -36,7 +38,8 @@
     "passport-jwt": "^4.0.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^6.6.6"
+    "rxjs": "^6.6.6",
+    "socket.io": "^4.2.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.6.0",
