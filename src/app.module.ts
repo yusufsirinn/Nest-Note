@@ -6,6 +6,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { AllExceptionFilter } from './base-exception-filter/all-exception.filter';
+import { ChatGateway } from './chat/chat.gateway';
+import { ChatModule } from './chat/chat.module';
 import config from './config';
 import { LoggingInterceptor } from './logging/logging.interceptor';
 import { NoteModule } from './note/note.module';
@@ -17,7 +19,8 @@ import { TasksModule } from './tasks/tasks.module';
     NoteModule,
     AuthModule,
     ScheduleModule.forRoot(),
-    TasksModule
+    TasksModule,
+    ChatModule
   ],
   controllers: [AppController],
   providers: [AppService,
@@ -28,7 +31,8 @@ import { TasksModule } from './tasks/tasks.module';
     {
       provide: APP_FILTER,
       useClass: AllExceptionFilter
-    }
+    },
+    ChatGateway
   ],
 })
 export class AppModule { }
